@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
+  let navigate = useNavigate();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState(false);
@@ -16,8 +18,7 @@ const LoginComponent = () => {
 
   const loginClickHandler = () => {
     if (userName === 'anukul' && password === 'abcd') {
-      setLoginFalied(false);
-      setSuccessMessage(true);
+      navigate('/welcome');
     } else {
       setLoginFalied(true);
       setSuccessMessage(false);
