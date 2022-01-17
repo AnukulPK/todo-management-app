@@ -18,7 +18,7 @@ const LoginComponent = () => {
 
   const loginClickHandler = () => {
     if (userName === 'anukul' && password === 'abcd') {
-      navigate('/welcome');
+      navigate(`/welcome/${userName}`);
     } else {
       setLoginFalied(true);
       setSuccessMessage(false);
