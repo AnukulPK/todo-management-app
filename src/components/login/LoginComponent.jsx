@@ -27,23 +27,32 @@ const LoginComponent = () => {
 
   return (
     <>
-      {loginFailed && <p>Invalid Credentials</p>}
-      {successMessage && <p>login Successful</p>}
-      User Name:
-      <input
-        type="text"
-        name="username"
-        value={userName}
-        onChange={userNameInputHandler}
-      />
-      Password:{' '}
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={passwordInputHandler}
-      />
-      <button onClick={loginClickHandler}>Login</button>
+      <div>
+        <h1>Log In</h1>
+        <div className="container">
+          {loginFailed && (
+            <div className="alert alert-warning">Invalid Credentials</div>
+          )}
+          {/* {successMessage && <p>login Successful</p>} */}
+          User Name:
+          <input
+            type="text"
+            name="username"
+            value={userName}
+            onChange={userNameInputHandler}
+          />
+          Password:{' '}
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={passwordInputHandler}
+          />
+          <button className="btn btn-success" onClick={loginClickHandler}>
+            Login
+          </button>
+        </div>
+      </div>
     </>
   );
 };

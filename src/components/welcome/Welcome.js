@@ -7,9 +7,12 @@ const Welcome = () => {
   //   console.log(name);
 
   return (
-    <div>
-      Welcome {name}.You can manage todos <Link to="/todos">here</Link>
-    </div>
+    <>
+      <h1>Welcome</h1>
+      <div className="container">
+        Welcome {name}.You can manage todos <Link to="/todos">here</Link>
+      </div>
+    </>
   );
 };
 
