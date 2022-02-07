@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthencticationService from './AuthenticationService.js';
 
 const LoginComponent = () => {
   let navigate = useNavigate();
@@ -18,6 +19,7 @@ const LoginComponent = () => {
 
   const loginClickHandler = () => {
     if (userName === 'anukul' && password === 'abcd') {
+      AuthencticationService.registerSuccessfulLogin(userName);
       navigate(`/welcome/${userName}`);
     } else {
       setLoginFalied(true);
