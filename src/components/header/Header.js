@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AuthenticationService from '../login/AuthenticationService';
 
 const Header = () => {
   return (
@@ -29,7 +30,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link className="nav-link" to="/logout">
+            <Link
+              className="nav-link"
+              to="/logout"
+              onClick={AuthenticationService.logout}
+            >
               Logout
             </Link>
           </li>
