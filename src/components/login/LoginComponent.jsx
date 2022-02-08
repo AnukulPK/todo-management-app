@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AuthencticationService from './AuthenticationService.js';
+import AuthencticationService from '../todo/AuthenticationService.js';
 
 const LoginComponent = () => {
   let navigate = useNavigate();

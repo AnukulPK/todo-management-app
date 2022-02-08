@@ -9,6 +9,7 @@ import Footer from './components/footer/Footer';
 import Logout from './components/logout/Logout';
 import './bootstrap.css';
 import './App.css';
+import AuthenticatedRoute from './components/todo/AuthenticatedRoute';
 
 function App() {
   return (
@@ -18,9 +19,30 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginComponent />} />
           <Route path="/login" element={<LoginComponent />} />
-          <Route path="/welcome/:name" element={<Welcome />} />
-          <Route path="/todos" element={<ListTodos />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route
+            path="/welcome/:name"
+            element={
+              <AuthenticatedRoute>
+                <Welcome />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path="/todos"
+            element={
+              <AuthenticatedRoute>
+                <ListTodos />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path="/logout"
+            element={
+              <AuthenticatedRoute>
+                <Logout />
+              </AuthenticatedRoute>
+            }
+          />
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />

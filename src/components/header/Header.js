@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import AuthenticationService from '../login/AuthenticationService';
+import { Link } from 'react-router-dom';
+import AuthenticationService from '../todo/AuthenticationService';
 
 const Header = () => {
   const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
@@ -54,4 +54,4 @@ const Header = () => {
   );
 };
 
-export default withRouter(Header);
+export default Header;

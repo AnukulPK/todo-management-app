@@ -1,4 +1,4 @@
-class AuthencticationService {
+class AuthenticationService {
   registerSuccessfulLogin(username, password) {
     console.log('Authenticateion service called');
     sessionStorage.setItem('authenticatedUser', username);
@@ -17,4 +17,4 @@ class AuthencticationService {
   }
 }
 
-export default new AuthencticationService();
+export default new AuthenticationService();
