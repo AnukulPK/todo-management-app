@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { ExecuteHelloWorldService } from "../../api/todo/HelloWorldService";
 
 const Welcome = () => {
   const { name } = useParams();
+  const [welcomeMessage, setWelcomeMessage] = useState("");
 
   //   console.log(name);
 
   const helloWorldHandler = async (name) => {
     // const data = await fetch(`http://localhost:8080/hello-world-bean/${name}`);
-
-    console.log(name);
+    const data = await ExecuteHelloWorldService();
+    setWelcomeMessage(data?.data);
+    // console.log(data);
   };
 
   return (
@@ -27,6 +30,7 @@ const Welcome = () => {
           Get Welcome Message
         </button>
       </div>
+      <div className="container">{welcomeMessage}</div>
     </>
   );
 };
