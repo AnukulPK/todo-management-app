@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AuthencticationService from '../todo/AuthenticationService.js';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthencticationService from "../todo/AuthenticationService.js";
 
 const LoginComponent = () => {
   let navigate = useNavigate();
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState(false);
   const [loginFailed, setLoginFalied] = useState(false);
 
@@ -18,7 +18,7 @@ const LoginComponent = () => {
   };
 
   const loginClickHandler = () => {
-    if (userName === 'anukul' && password === 'abcd') {
+    if (userName === "anukul" && password === "abcd") {
       AuthencticationService.registerSuccessfulLogin(userName);
       navigate(`/welcome/${userName}`);
     } else {
@@ -31,28 +31,35 @@ const LoginComponent = () => {
     <>
       <div>
         <h1>Log In</h1>
-        <div className="container">
+        <div className="container login-container">
           {loginFailed && (
             <div className="alert alert-warning">Invalid Credentials</div>
           )}
           {/* {successMessage && <p>login Successful</p>} */}
-          User Name:
-          <input
-            type="text"
-            name="username"
-            value={userName}
-            onChange={userNameInputHandler}
-          />
-          Password:{' '}
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={passwordInputHandler}
-          />
-          <button className="btn btn-success" onClick={loginClickHandler}>
-            Login
-          </button>
+          <div>
+            {" "}
+            User Name:
+            <input
+              type="text"
+              name="username"
+              value={userName}
+              onChange={userNameInputHandler}
+            />
+          </div>
+          <div>
+            Password:{" "}
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={passwordInputHandler}
+            />
+          </div>
+          <div>
+            <button className="btn btn-success" onClick={loginClickHandler}>
+              Login
+            </button>
+          </div>
         </div>
       </div>
     </>
