@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
-  ExecuteHelloWorldService,
-  ExecuteHelloWorldBeanService,
+  // ExecuteHelloWorldService,
+  // ExecuteHelloWorldBeanService,
+  ExecuteHelloWorldPathVariableService,
 } from "../../api/todo/HelloWorldService";
 
 const Welcome = () => {
@@ -15,7 +16,7 @@ const Welcome = () => {
     // const data = await fetch(`http://localhost:8080/hello-world-bean/${name}`);
     // const data = await ExecuteHelloWorldService();
     // setWelcomeMessage(data?.data);
-    const data = await ExecuteHelloWorldBeanService();
+    const data = await ExecuteHelloWorldPathVariableService(name);
     setWelcomeMessage(data?.data?.message);
     // console.log(data);
   };
