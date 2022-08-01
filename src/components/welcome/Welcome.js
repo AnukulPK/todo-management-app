@@ -16,8 +16,13 @@ const Welcome = () => {
     // const data = await fetch(`http://localhost:8080/hello-world-bean/${name}`);
     // const data = await ExecuteHelloWorldService();
     // setWelcomeMessage(data?.data);
-    const data = await ExecuteHelloWorldPathVariableService(name);
-    setWelcomeMessage(data?.data?.message);
+    try {
+      const data = await ExecuteHelloWorldPathVariableService(name);
+      setWelcomeMessage(data?.data?.message);
+    } catch (e) {
+      setWelcomeMessage(e.response.data.message);
+    }
+
     // console.log(data);
   };
 
