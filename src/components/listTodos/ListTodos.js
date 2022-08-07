@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { RetrieveAllTodos } from "../../api/todo/TodoDataService";
+import AuthenticationService from "../todo/AuthenticationService";
 
 const ListTodos = () => {
-  const initToDos = [
-    {
-      id: 1,
-      description: 'Learn React',
-      done: false,
-      targetDate: new Date(),
-    },
-    {
-      id: 2,
-      description: 'Learn DSA',
-      done: false,
-      targetDate: new Date(),
-    },
-    {
-      id: 3,
-      description: 'Visit Canada',
-      done: false,
-      targetDate: new Date(),
-    },
-  ];
-  const [todos, setTodos] = useState(initToDos);
+  // const initToDos = [
+  //   {
+  //     id: 1,
+  //     description: 'Learn React',
+  //     done: false,
+  //     targetDate: new Date(),
+  //   },
+  //   {
+  //     id: 2,
+  //     description: 'Learn DSA',
+  //     done: false,
+  //     targetDate: new Date(),
+  //   },
+  //   {
+  //     id: 3,
+  //     description: 'Visit Canada',
+  //     done: false,
+  //     targetDate: new Date(),
+  //   },
+  // ];
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    let username = AuthenticationService.getLoggedInUserName();
+    RetrieveAllTodos(username).then((res) => {
+      setTodos(res.data);
+      console.log(res);
+    });
+  }, []);
+
   return (
     <div>
       <h1>List Todos</h1>
