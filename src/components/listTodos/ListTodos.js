@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RetrieveAllTodos } from "../../api/todo/TodoDataService";
+import { RetrieveAllTodos, DeleteTodo } from "../../api/todo/TodoDataService";
 import AuthenticationService from "../todo/AuthenticationService";
 
 const ListTodos = () => {
@@ -24,18 +24,33 @@ const ListTodos = () => {
   //   },
   // ];
   const [todos, setTodos] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
+    refreshTodos();
+  }, []);
+
+  const refreshTodos = () => {
     let username = AuthenticationService.getLoggedInUserName();
     RetrieveAllTodos(username).then((res) => {
       setTodos(res.data);
       console.log(res);
     });
-  }, []);
+  };
+
+  const deleteToDoHandler = (id) => {
+    let username = AuthenticationService.getLoggedInUserName();
+    console.log(id, username);
+    DeleteTodo(username, id).then((res) => {
+      setMessage(`Deletion of todo ${id} successful`);
+      refreshTodos();
+    });
+  };
 
   return (
     <div>
       <h1>List Todos</h1>
+      {message && <div className="alert alert-success">{message}</div>}
       <div className="container">
         <table className="table">
           <thead>
@@ -44,6 +59,7 @@ const ListTodos = () => {
               <th>Description</th>
               <th>Is Completed</th>
               <th>Target Date</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -53,6 +69,14 @@ const ListTodos = () => {
                 <td>{todo.description}</td>
                 <td>{todo.done.toString()}</td>
                 <td>{todo.targetDate.toString()}</td>
+                <td>
+                  <button
+                    className="btn btn-warning"
+                    onClick={() => deleteToDoHandler(todo.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
