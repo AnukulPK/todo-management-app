@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { RetrieveAllTodos, DeleteTodo } from "../../api/todo/TodoDataService";
 import AuthenticationService from "../todo/AuthenticationService";
 
@@ -25,6 +26,7 @@ const ListTodos = () => {
   // ];
   const [todos, setTodos] = useState([]);
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     refreshTodos();
@@ -47,6 +49,10 @@ const ListTodos = () => {
     });
   };
 
+  const updateToDoHandler = (id) => {
+    navigate(`/todos/${id}`);
+  };
+
   return (
     <div>
       <h1>List Todos</h1>
@@ -59,6 +65,7 @@ const ListTodos = () => {
               <th>Description</th>
               <th>Is Completed</th>
               <th>Target Date</th>
+              <th>Update</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -72,6 +79,14 @@ const ListTodos = () => {
                 <td>
                   <button
                     className="btn btn-warning"
+                    onClick={() => updateToDoHandler(todo.id)}
+                  >
+                    Update
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-danger"
                     onClick={() => deleteToDoHandler(todo.id)}
                   >
                     Delete
