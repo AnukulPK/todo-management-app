@@ -6,14 +6,24 @@ import { Field, Form, Formik } from "formik";
 const TodoComponent = () => {
   const { id } = useParams();
   const [formId, setFormId] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState(moment(new Date()).format("YYYY-MM-DD"));
+  const [description, setDescription] = useState("Learn Forms");
+  const [targetDate, setTargetDate] = useState(moment().format("YYYY-MM-DD"));
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
 
   return (
     <div>
       <h1>Todo</h1>
       <div className="container">
-        <Formik>
+        <Formik
+          initialValues={{
+            description,
+            targetDate,
+          }}
+          onSubmit={onSubmit}
+        >
           {(props) => (
             <Form>
               <fieldset className="form-group">
