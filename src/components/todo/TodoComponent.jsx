@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import { useParams } from "react-router";
 import moment from "moment";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 
 const TodoComponent = () => {
   const { id } = useParams();
   const [formId, setFormId] = useState("");
   const [description, setDescription] = useState("Learn Forms");
-  const [targetDate, setTargetDate] = useState(moment().format("YYYY-MM-DD"));
-
+  const currentDate = moment(new Date()).format("YYYY-MM-DD");
+  const [targetDate, setTargetDate] = useState(currentDate);
+  console.log(currentDate);
   const onSubmit = (values) => {
     console.log(values);
+  };
+
+  const validate = (values) => {
+    let errors = {};
+    if (!values.description) {
+      errors.description = "Enter a description";
+    } else if (values.description.length < 5) {
+      errors.description = "Enter atleast 5 characters for a description";
+    }
+
+    // if (moment(values.targetDate).isValid()) {
+    //   errors.targetDate = "Enter a valid target date";
+    // }
+    return errors;
   };
 
   return (
@@ -23,9 +38,23 @@ const TodoComponent = () => {
             targetDate,
           }}
           onSubmit={onSubmit}
+          validateOnChange={false}
+          validateOnBlur={false}
+          validate={validate}
         >
           {(props) => (
             <Form>
+              <ErrorMessage
+                name="description"
+                component="div"
+                className="alert alert-warning"
+              />
+
+              <ErrorMessage
+                name="targetDate"
+                component="div"
+                className="alert alert-warning"
+              />
               <fieldset className="form-group">
                 <label>Description</label>
                 <Field
