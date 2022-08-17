@@ -36,7 +36,7 @@ const ListTodos = () => {
     let username = AuthenticationService.getLoggedInUserName();
     RetrieveAllTodos(username).then((res) => {
       setTodos(res.data);
-      console.log(res);
+      // console.log(res);
     });
   };
 

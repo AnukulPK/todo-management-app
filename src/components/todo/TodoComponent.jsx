@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import moment from "moment";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { RetrieveTodo } from "../../api/todo/TodoDataService";
+import AuthenticationService from "./AuthenticationService";
 
 const TodoComponent = () => {
   const { id } = useParams();
   const [formId, setFormId] = useState("");
-  const [description, setDescription] = useState("Learn Forms");
+  const [description, setDescription] = useState("");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const [targetDate, setTargetDate] = useState(currentDate);
-  console.log(currentDate);
+
   const onSubmit = (values) => {
     console.log(values);
   };
+
+  useEffect(() => {
+    let username = AuthenticationService.getLoggedInUserName();
+    RetrieveTodo(username, id).then((res) => {
+      setDescription(res.data.description);
+      setTargetDate(moment(res.data.targetDate).format("YYYY-MM-DD"));
+    });
+  }, []);
 
   const validate = (values) => {
     let errors = {};
@@ -41,6 +51,7 @@ const TodoComponent = () => {
           validateOnChange={false}
           validateOnBlur={false}
           validate={validate}
+          enableReinitialize={true}
         >
           {(props) => (
             <Form>
