@@ -11,3 +11,7 @@ export const DeleteTodo = (name, id) => {
 export const RetrieveTodo = (name, id) => {
   return axios.get(`http://localhost:8080/users/${name}/todos/${id}`);
 };
+
+export const UpdateTodoDetails = (name, id, todo) => {
+  return axios.put(`http://localhost:8080/users/${name}/todos/${id}`, todo);
+};

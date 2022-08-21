@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { RetrieveAllTodos, DeleteTodo } from "../../api/todo/TodoDataService";
@@ -75,7 +76,9 @@ const ListTodos = () => {
                 {/* <td>{todo.id}</td> */}
                 <td>{todo.description}</td>
                 <td>{todo.done.toString()}</td>
-                <td>{todo.targetDate.toString()}</td>
+                <td>
+                  {moment(todo.targetDate.toString()).format("YYYY-MM-DD")}
+                </td>
                 <td>
                   <button
                     className="btn btn-warning"

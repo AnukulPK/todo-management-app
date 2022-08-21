@@ -1,19 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import moment from "moment";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { RetrieveTodo } from "../../api/todo/TodoDataService";
+import {
+  RetrieveTodo,
+  UpdateTodoDetails,
+} from "../../api/todo/TodoDataService";
 import AuthenticationService from "./AuthenticationService";
 
 const TodoComponent = () => {
   const { id } = useParams();
+  let navigate = useNavigate();
   const [formId, setFormId] = useState("");
   const [description, setDescription] = useState("");
   const currentDate = moment(new Date()).format("YYYY-MM-DD");
   const [targetDate, setTargetDate] = useState(currentDate);
 
   const onSubmit = (values) => {
-    console.log(values);
+    let username = AuthenticationService.getLoggedInUserName();
+    UpdateTodoDetails(username, id, {
+      id: id,
+      description: values.description,
+      targetDate: values.targetDate,
+    }).then(() => {
+      navigate("/todos");
+    });
   };
 
   useEffect(() => {
