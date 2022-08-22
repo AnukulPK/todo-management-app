@@ -54,6 +54,10 @@ const ListTodos = () => {
     navigate(`/todos/${id}`);
   };
 
+  const addTodoHandler = () => {
+    navigate(`/todos/-1`);
+  };
+
   return (
     <div>
       <h1>List Todos</h1>
@@ -99,6 +103,12 @@ const ListTodos = () => {
             ))}
           </tbody>
         </table>
+
+        <div className="row">
+          <button className="btn btn-success" onClick={addTodoHandler}>
+            Add
+          </button>
+        </div>
       </div>
     </div>
   );

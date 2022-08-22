@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import moment from "moment";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import {
+  CreateTodo,
   RetrieveTodo,
   UpdateTodoDetails,
 } from "../../api/todo/TodoDataService";
@@ -18,16 +19,26 @@ const TodoComponent = () => {
 
   const onSubmit = (values) => {
     let username = AuthenticationService.getLoggedInUserName();
-    UpdateTodoDetails(username, id, {
+    let todo = {
       id: id,
       description: values.description,
       targetDate: values.targetDate,
-    }).then(() => {
-      navigate("/todos");
-    });
+    };
+    if (id === -1) {
+      CreateTodo(username, todo).then(() => {
+        navigate("/todos");
+      });
+    } else {
+      UpdateTodoDetails(username, id, todo).then(() => {
+        navigate("/todos");
+      });
+    }
   };
 
   useEffect(() => {
+    if (id === -1) {
+      return;
+    }
     let username = AuthenticationService.getLoggedInUserName();
     RetrieveTodo(username, id).then((res) => {
       setDescription(res.data.description);
