@@ -19,8 +19,16 @@ const Welcome = () => {
     try {
       const data = await ExecuteHelloWorldPathVariableService(name);
       setWelcomeMessage(data?.data?.message);
-    } catch (e) {
-      setWelcomeMessage(e.response.data.message);
+    } catch (error) {
+      let errorMessage = "";
+      if (error.message) {
+        errorMessage += error.message;
+      }
+
+      if (error.response && error.response.data) {
+        errorMessage += error.response.data.message;
+      }
+      setWelcomeMessage(errorMessage);
     }
 
     // console.log(data);
