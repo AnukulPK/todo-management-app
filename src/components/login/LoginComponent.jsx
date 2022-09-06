@@ -18,13 +18,15 @@ const LoginComponent = () => {
   };
 
   const loginClickHandler = () => {
-    if (userName === "anukul" && password === "abcd") {
-      AuthencticationService.registerSuccessfulLogin(userName);
-      navigate(`/welcome/${userName}`);
-    } else {
-      setLoginFalied(true);
-      setSuccessMessage(false);
-    }
+    AuthencticationService.executeBasicAuthenticationService(userName, password)
+      .then(() => {
+        AuthencticationService.registerSuccessfulLogin(userName);
+        navigate(`/welcome/${userName}`);
+      })
+      .catch((e) => {
+        setLoginFalied(true);
+        setSuccessMessage(false);
+      });
   };
 
   return (
