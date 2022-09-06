@@ -20,7 +20,7 @@ const LoginComponent = () => {
   const loginClickHandler = () => {
     AuthencticationService.executeBasicAuthenticationService(userName, password)
       .then(() => {
-        AuthencticationService.registerSuccessfulLogin(userName);
+        AuthencticationService.registerSuccessfulLogin(userName, password);
         navigate(`/welcome/${userName}`);
       })
       .catch((e) => {
